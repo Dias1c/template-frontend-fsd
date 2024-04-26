@@ -16,5 +16,5 @@ npm create vite@latest .
 npm i
 ```
 
-3. Configure aliases in by [`followed instruction`](./CODE-STYLE.md##Configure-aliases)
+3. Configure aliases in by [`followed instruction`](./CODE-STYLE.md#configure-aliases)
 4. Start develop your project
