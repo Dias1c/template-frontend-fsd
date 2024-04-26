@@ -2,6 +2,85 @@
 
 This convention was created to make code easier to develop and understand. Adhere to these rules consciously, understanding why each rule exists. This means that these rules can be broken if you think it is true.
 
+
+
+## Global Imports
+
+### Import throwgh `~/`
+
+```tsx
+// ❌ - here better to use global imports
+import { something } from '../../../../../lib/something'
+
+// ✅
+import { something } from '../lib/something'
+// ✅
+import { something } from '../../lib/something'
+
+// ✅
+import { something } from '~/shared/lib/something'
+```
+
+### Configure aliases
+
+1. Configure `vite.config.ts`
+   in root directory
+
+```ts
+// ? file: vite.config.ts
+
+// ...
+
+/**
+ * Required import for configure aliases
+ */
+import path from 'path'
+
+export default defineConfig({
+  // ...
+  resolve: {
+    // ...
+
+    /**
+     * Configure aliases
+     */
+    alias: [{ find: '~', replacement: path.resolve(__dirname, 'src') }],
+  },
+})
+```
+
+2. Configure `tsconfig.json`
+   in root directory
+
+```json
+// ? file: tsconfig.json
+{
+  "compilerOptions": {
+    // ...
+
+    // Configure aliases
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["*"]
+    }
+  }
+}
+```
+
+3. Try to import something with prerifx `~/example` in `src/main.tsx`
+
+```tsx
+import { config } from '~/shared/configs'
+```
+
+4. Try to build
+
+```sh
+npm run build
+```
+
+> If build shows error with imports, try configure again from `1`-st step.
+
 ## Typescript
 
 Code style guide for typescript.
@@ -416,80 +495,3 @@ function getUsersIdOrdersId(props: { userId: string; orderId: string }) {
   // ...
 }
 ```
-
-## Global Imports
-
-### Import throwgh `~/`
-
-```tsx
-// ❌ - here better to use global imports
-import { something } from '../../../../../lib/something'
-
-// ✅
-import { something } from '../lib/something'
-// ✅
-import { something } from '../../lib/something'
-
-// ✅
-import { something } from '~/shared/lib/something'
-```
-
-### Configure aliases
-
-1. Configure `vite.config.ts`
-   in root directory
-
-```ts
-// ? file: vite.config.ts
-
-// ...
-
-/**
- * Required import for configure aliases
- */
-import path from 'path'
-
-export default defineConfig({
-  // ...
-  resolve: {
-    // ...
-
-    /**
-     * Configure aliases
-     */
-    alias: [{ find: '~', replacement: path.resolve(__dirname, 'src') }],
-  },
-})
-```
-
-2. Configure `tsconfig.json`
-   in root directory
-
-```json
-// ? file: tsconfig.json
-{
-  "compilerOptions": {
-    // ...
-
-    // Configure aliases
-    "baseUrl": "./src",
-    "paths": {
-      "~/*": ["*"]
-    }
-  }
-}
-```
-
-3. Try to import something with prerifx `~/example` in `src/main.tsx`
-
-```tsx
-import { config } from '~/shared/configs'
-```
-
-4. Try to build
-
-```sh
-npm run build
-```
-
-> If build shows error with imports, try configure again from `1`-st step.
