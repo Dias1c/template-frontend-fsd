@@ -2,24 +2,7 @@
 
 This convention was created to make code easier to develop and understand. Adhere to these rules consciously, understanding why each rule exists. This means that these rules can be broken if you think it is true.
 
-
-
 ## Global Imports
-
-### Import throwgh `~/`
-
-```tsx
-// ❌ - here better to use global imports
-import { something } from '../../../../../lib/something'
-
-// ✅
-import { something } from '../lib/something'
-// ✅
-import { something } from '../../lib/something'
-
-// ✅
-import { something } from '~/shared/lib/something'
-```
 
 ### Configure aliases
 
@@ -33,6 +16,10 @@ import { something } from '~/shared/lib/something'
 
 /**
  * Required import for configure aliases
+ *
+ * ```
+ * npm i --save-dev @types/node
+ * ```
  */
 import path from 'path'
 
@@ -49,7 +36,7 @@ export default defineConfig({
 })
 ```
 
-2. Configure `tsconfig.json`
+2. Configure `tsconfig.app.json`
    in root directory
 
 ```json
@@ -80,6 +67,21 @@ npm run build
 ```
 
 > If build shows error with imports, try configure again from `1`-st step.
+
+### Import throwgh `~/`
+
+```tsx
+// ❌ - here better to use global imports
+import { something } from '../../../../../lib/something'
+
+// ✅
+import { something } from '../lib/something'
+// ✅
+import { something } from '../../lib/something'
+
+// ✅
+import { something } from '~/shared/lib/something'
+```
 
 ## Typescript
 
