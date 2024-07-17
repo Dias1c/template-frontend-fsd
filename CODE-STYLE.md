@@ -150,7 +150,7 @@ enum EEntityStatuses {}
 enum EEntityStatus {}
 ```
 
-#### Варианты enum
+#### enum variants
 
 Name of enum variants must be follow identical convention.
 
@@ -248,6 +248,7 @@ export function MyComponent() {
 
 Create components in folder with his name, for example `MyComponent` with `index` file.
 
+> [!NOTE]
 > The reason of this rule, cause your component can use own hooks or sub comopnents which use only him, and this subcomponents will be stored in folder `MyComponent`.
 
 ```tsx
